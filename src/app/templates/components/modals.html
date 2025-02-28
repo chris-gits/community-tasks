@@ -1,0 +1,32 @@
+<div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/api/create_task" method="POST" class="d-flex flex-column gap-2 p-2">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createTaskModalLabel">Create a New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column gap-2">
+                        <div class="m-2">
+                            <label for="createTaskInputTitle" class="form-label">Title</label>
+                            <input required name="title" maxlength="32" type="text" id="createTaskInputTitle" class="form-control" placeholder="Enter Title">
+                        </div>
+                        <div class="m-2">
+                            <label for="createTaskInputDescription" class="form-label">Description</label>
+                            <textarea required name="description" maxlength="256" id="createTaskInputDescription" class="form-control" placeholder="Enter Description"></textarea>
+                        </div>
+                        <div class="m-2">
+                            <label for="createTaskInputDeadline" class="form-label">Deadline</label>
+                            <input required name="deadline" type="datetime-local" id="createTaskInputDeadline" class="form-control" placeholder="Enter Deadline">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

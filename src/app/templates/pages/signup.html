@@ -1,0 +1,34 @@
+{%extends "base.html"%}
+
+{% set PageTitle = "Sign Up" %}
+{% set HeaderSubTitle = "Sign Up" %}
+
+{%block BaseBody%}
+<div class="container-sm flex-grow-1">
+    <div class="p-4 d-flex align-items-center justify-content-center h-100">
+        <div class="card p-4">
+            <h4 class="mb-4 text-center fw-semibold">Sign Up</h4>
+            <form class="d-flex flex-column gap-2" method="POST" action="/api/signup">
+                <div class="form-group">
+                    <label for="signupInputName">Name</label>
+                    <input required name="name" type="text" class="form-control" id="signupInputName" aria-describedby="signupNameHelp" placeholder="Enter Name">
+                    <small id="signupNameHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="signupInputEmail">Email</label>
+                    <input required name="email" type="email" class="form-control" id="signupInputEmail" aria-describedby="signupEmailHelp" placeholder="Enter Email">
+                    <small id="signupEmailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="signupInputPassword">Password</label>
+                    <input required name="password" type="password" class="form-control" id="signupInputPassword" aria-describedby="signupEmailHelp" placeholder="Enter Password">
+                    <small id="signupEmailHelp" class="form-text text-muted"></small>
+                </div>
+                <button type="submit" class="mt-4 btn btn-primary">Sign Up</button>
+                <hr>
+                <a href="/signin" class="text-center small text-decoration-none">Or Sign In</a>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

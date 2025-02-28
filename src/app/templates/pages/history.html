@@ -1,0 +1,32 @@
+{%extends "base.html"%}
+
+{% set PageTitle = "History" %}
+{% set HeaderSubTitle = "History" %}
+
+{%block BaseBody%}
+<div class="container-sm flex-grow-1">
+    <div class="p-2">
+        <h3 class="d-flex align-items-center gap-2">
+            <span class="fw-semibold">Completed Tasks</span>
+            {%if tasks.claimed_complete | length  > 0 %}
+                <span class="badge bg-success fw-bold fs-6">{{tasks.claimed_complete | length }} Total</span>
+            {%else%}
+                <span class="badge bg-secondary fw-bold fs-6">None</span>
+            {%endif%}
+        </h3>
+        <br>
+        {{ build_card_grid(tasks.claimed_complete, ["completed"], "You have not completed any tasks yet.") }}
+        <hr class="mb-4 mt-2"/>
+        <h3 class="d-flex align-items-center gap-2">
+            <span class="fw-semibold">Expired Tasks</span>
+            {%if tasks.claimed_incomplete | length  > 0 %}
+                <span class="badge bg-danger fw-bold fs-6">{{tasks.claimed_incomplete | length }} Total</span>
+            {%else%}
+                <span class="badge bg-secondary fw-bold fs-6">None</span>
+            {%endif%}
+        </h3>
+        <br>
+        {{ build_card_grid(tasks.claimed_incomplete, ["incomplete"], "You have not exceeded the deadline of any tasks.") }}
+    </div>
+</div>
+{%endblock%}

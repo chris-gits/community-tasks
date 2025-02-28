@@ -1,0 +1,55 @@
+{%macro build_card(task, actions)%}
+<div class="col-md-4 mb-4">
+    <div class="card">
+        <div class="card-header">
+            <span class="fw-bold">{{task.title}}</span> <small class="text-muted">by {{task.creator_display}}</small>
+        </div>
+        <div class="card-body">
+            <div class="mb-2">
+                {{task.description}}
+            </div>
+            <div class="mb-3 text-secondary">By {{task.deadline_display}}</div>
+            <div class="d-flex gap-2 float-end">
+                {%for action in actions%}
+                    {%if action == "claim"%}
+                        <form action="/api/claim_task" method="POST">
+                            <input type="hidden" name="id" value="{{task.id}}">
+                            <button type="submit" class="btn btn-primary float-end">Claim Task</button>
+                        </form>
+                    {%elif action == "drop" %}
+                        <form action="/api/drop_task" method="POST">
+                            <input type="hidden" name="id" value="{{task.id}}">
+                            <button type="submit" class="btn btn-danger float-end">Drop</button>
+                        </form>
+                    {%elif action == "complete"%}
+                        <form action="/api/complete_task" method="POST">
+                            <input type="hidden" name="id" value="{{task.id}}">
+                            <button type="submit" class="btn btn-success float-end">Mark Complete</button>
+                        </form>
+                    {%elif action == "completed"%}
+                        <button class="btn btn-outline-success disabled float-end">
+                            Completed {{task.completed_on_display}}
+                        </button>
+                    {%elif action == "incomplete"%}
+                        <button class="btn btn-outline-danger disabled float-end">
+                            Due {{task.deadline_display}}
+                        </button>
+                    {%endif%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+{%endmacro%}
+
+{%macro build_card_grid(tasks, actions, fallback_text)%}
+<div class="row" data-masonry='{"percentPosition": true }'>
+    {%if (tasks | length) == 0%}
+        <h4 class="text-secondary">{{ fallback_text }}</h4>
+    {%else%}
+        {%for task in tasks%}
+            {{ build_card(task, actions) }}
+        {%endfor%}
+    {%endif%}
+</div>
+{%endmacro%}

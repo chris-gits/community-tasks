@@ -1,0 +1,13 @@
+# Environments
+.venv/
+.env
+
+# Database
+/src/instance/
+/migrations/
+
+# Caches
+__pycache__/
+
+# Misc
+.DS_Store

@@ -1,0 +1,32 @@
+{%extends "base.html"%}
+
+{% set PageTitle = "Dashboard" %}
+{% set HeaderSubTitle = "Dashboard" %}
+
+{%block BaseBody%}
+<div class="container-sm flex-grow-1">
+    <div class="p-2">
+        <h3 class="d-flex align-items-center gap-2">
+            <span class="fw-semibold">My Tasks</span>
+            {%if tasks.future_claimed | length > 0%}
+                <span class="badge bg-warning fw-bold fs-6">{{tasks.future_claimed | length}} Remaining</span>
+            {%else%}
+                <span class="badge bg-success fw-bold fs-6">All done!</span>
+            {%endif%}
+        </h3>
+        <br>
+        {{ build_card_grid(tasks.future_claimed, ["drop", "complete"], "You have no more assigned tasks to complete.") }}
+        <hr class="mb-4 mt-2"/>
+        <h3 class="d-flex align-items-center gap-2">
+            <span class="fw-semibold">Available Tasks</span>
+            {%if tasks.future_unclaimed | length > 0 %}
+                <span class="badge bg-secondary fw-bold fs-6">{{tasks.future_unclaimed | length}} Available</span>
+            {%else%}
+                <span class="badge bg-success fw-bold fs-6">No more!</span>
+            {%endif%}
+        </h3>
+        <br>
+        {{ build_card_grid(tasks.future_unclaimed, ["claim"], "There are no more tasks available to claim.") }}
+    </div>
+</div>
+{%endblock%}
