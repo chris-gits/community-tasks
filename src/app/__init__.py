@@ -17,13 +17,17 @@ def create_app():
     
     DotENV.load_dotenv()
  
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
+    app.config['SQLALCHEMY_DATABASE_URI'] = OS.environ.get("DATABASE_URI")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = OS.environ.get("SECRET_KEY")
     
     database.init_app(app)
+    
     from .models.users import User
     from .models.tasks import Task
+    
+    with app.app_context() as context:
+        database.create_all()
     
     login_manager = FlaskLogin.LoginManager()
     login_manager.init_app(app)

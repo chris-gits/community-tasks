@@ -1,4 +1,4 @@
-# Community Tasks Manager (In-complete)
+# Community Tasks Manager
 
 A web-app designed to allow communities to organize, self-assign, and track general tasks.
 
@@ -12,27 +12,3 @@ A web-app designed to allow communities to organize, self-assign, and track gene
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![Bash Script](https://img.shields.io/badge/bash_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 
-## The Problem
-
-In my house, chores can be an absolute **nightmare**. I'm definitely using the word *chore* broadly, but knowing who wants what to be done, by what specific date, and assigning these appropriately is a problem I decided I would personally tackle.
-
-As I began brainstorming into possible solutions for this problem, I found myself quickly broadening my scope. Rather than focus on specific chores alone, I concluded that switching gears to focus on abstract "tasks" fulfilled my requirements. With this in mind, I laid out common properties of these tasks and how I expected users to interact with them.
-
-Thus, I identified the core of this problem and created an abstract draft of what was most needed from this app:
-
-- The ability to create tasks...
-  - with the properties of...
-    - a short title,
-    - a brief description
-    - and a clear end date.
-  - which can be...
-    - self assigned by a user
-    - inspected for...
-      - assignment
-      - and activity.
-
-And doing so behind a clear and intuitive interface.
-
-## The Solution
-
-...

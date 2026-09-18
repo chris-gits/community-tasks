@@ -10,35 +10,18 @@
 <body class="vh-100 d-flex flex-column">
     {{ bootstrap.load_js() }}
     
-    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
-    <script async>
-        const updateTheme = () => {
-            document.documentElement.setAttribute(
-                "data-bs-theme",
-                window.matchMedia(
-                    "(prefers-color-scheme: dark)"
-                ).matches ? "dark" : "light"
-            )
-        }
-    
-        window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
-            "change", () => {
-                updateTheme()
-            }
-        )
-    
-        updateTheme()
-    </script>
+    {%include "components/scripts/masonry.html"%}
+    {%include "components/scripts/themeUpdater.html"%}
 
     <!-- Macros -->
     {%from "components/cards.html" import build_card, build_card_grid%}
 
     <!-- Overlays -->
+    {%include "components/messages.html"%}
     {%include "components/modals.html"%}
     
     <!-- Blocks -->
     {%include "components/header.html"%}
-    {%include "components/messages.html"%}
     {%block BaseBody%}{%endblock%}
     {%include "components/footer.html"%}
 </body>

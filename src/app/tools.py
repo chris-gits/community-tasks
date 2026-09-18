@@ -1,8 +1,23 @@
 import datetime as DateTime
+import flask as Flask
+
 # All credit goes to chatgpt for this one.
 # I'm sure it would have been a fun and quick side-project
 # but it was a roadblock at 2 in the morning soooooo here
 # we are.
+
+def validate_form(form, message, titles: dict[str: str]) -> bool:
+    missing_titles = []
+    for key in titles.keys():
+        form_value = form.get(key)
+        if form_value is None: missing_titles.append(titles[key])
+    if len(missing_titles) > 0:
+        Flask.flash(
+            message + ', '.join(missing_titles),
+            category="Danger"
+        )
+        return False
+    return True
 
 def day_suffix(day: int) -> str:
     if 11 <= day <= 13:

@@ -1,3 +1,5 @@
+{%from "components/modals.html" import build_modal_confirmation%}
+
 {%macro build_card(task, actions)%}
 <div class="col-md-4 mb-4">
     <div class="card">
@@ -12,20 +14,32 @@
             <div class="d-flex gap-2 float-end">
                 {%for action in actions%}
                     {%if action == "claim"%}
-                        <form action="/api/claim_task" method="POST">
-                            <input type="hidden" name="id" value="{{task.id}}">
-                            <button type="submit" class="btn btn-primary float-end">Claim Task</button>
-                        </form>
+                        {{build_modal_confirmation(
+                            "confirmClaim" + (task.id | string),
+                            "Confirm Claim",
+                            "Are you sure that you want to claim \"" + task.title + "\"?",
+                            "/api/claim_task",
+                            '<input type="hidden" name="id" value="' + (task.id | string) + '">'
+                            )}}
+                        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#confirmClaim{{task.id}}">Claim Task</button>
                     {%elif action == "drop" %}
-                        <form action="/api/drop_task" method="POST">
-                            <input type="hidden" name="id" value="{{task.id}}">
-                            <button type="submit" class="btn btn-danger float-end">Drop</button>
-                        </form>
+                        {{build_modal_confirmation(
+                            "confirmDrop" + (task.id | string),
+                            "Confirm Drop",
+                            "Are you sure that you want to drop \"" + task.title + "\"?",
+                            "/api/drop_task",
+                            '<input type="hidden" name="id" value="' + (task.id | string) + '">'
+                            )}}
+                        <button type="submit" class="btn btn-danger float-end" data-bs-toggle="modal" data-bs-target="#confirmDrop{{task.id}}">Drop</button>
                     {%elif action == "complete"%}
-                        <form action="/api/complete_task" method="POST">
-                            <input type="hidden" name="id" value="{{task.id}}">
-                            <button type="submit" class="btn btn-success float-end">Mark Complete</button>
-                        </form>
+                        {{build_modal_confirmation(
+                            "confirmComplete" + (task.id | string),
+                            "Confirm Completion",
+                            "Are you sure that you want to mark \"" + task.title + "\" as complete?",
+                            "/api/complete_task",
+                            '<input type="hidden" name="id" value="' + (task.id | string) + '">'
+                            )}}
+                        <button type="submit" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#confirmComplete{{task.id}}">Mark Complete</button>
                     {%elif action == "completed"%}
                         <button class="btn btn-outline-success disabled float-end">
                             Completed {{task.completed_on_display}}
@@ -45,7 +59,7 @@
 {%macro build_card_grid(tasks, actions, fallback_text)%}
 <div class="row" data-masonry='{"percentPosition": true }'>
     {%if (tasks | length) == 0%}
-        <h4 class="text-secondary">{{ fallback_text }}</h4>
+        <h4 class="text-secondary mb-4">{{ fallback_text }}</h4>
     {%else%}
         {%for task in tasks%}
             {{ build_card(task, actions) }}

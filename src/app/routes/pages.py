@@ -28,7 +28,7 @@ def obtain_personalized_tasks(user) -> dict:
             ), tasks_list)),
         "future_unclaimed": list(filter(lambda task: (
             task.get("deadline") > dt_now and
-            task.get("claimed_by") is not user.id and
+            task.get("claimed_by") is None and
             not task.get("is_complete")
             ), tasks_list)),
         "claimed_complete": list(filter(lambda task: (
